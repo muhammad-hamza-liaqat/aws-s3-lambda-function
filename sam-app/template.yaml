@@ -21,7 +21,9 @@ Resources:
         - x86_64
       Environment:
         Variables:
-          bucket_name: "bucket_name_here"
+          bucket_name: "hamza_bucket"
+          aws_access_key: "aa"
+          aws_secret_key: "aa"
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api

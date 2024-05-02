@@ -1,22 +1,20 @@
-const AWS = require('aws-sdk');
+import AWS from 'aws-sdk';
 
 const s3 = new AWS.S3();
 
-exports.handler = async (event) => {
+export const lambdaHandler = async (event) => {
     console.log('Received event:', JSON.stringify(event));
 
     try {
-        const bucketName = process.env.BUCKET_NAME;
+        const bucketName = process.env.bucket_name;
         console.log('Bucket name:', bucketName);
-
-        // Extract image and description from req.body
-        const { image, description } = event.body;
+        const { image, description } = JSON.parse(event.body);
         const imageContent = Buffer.from(image, 'base64');
         console.log('Description:', description);
 
         const params = {
             Bucket: bucketName,
-            Key: Date.now().toString() + '.png', 
+            Key: decodeURIComponent(Date.now().toString() + '.png'), 
             Body: imageContent,
             ContentType: 'image/png', 
             Metadata: {

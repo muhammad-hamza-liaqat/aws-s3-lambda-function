@@ -8,7 +8,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 120
 
 Resources:
   HelloWorldFunction:
@@ -19,12 +19,15 @@ Resources:
       Runtime: nodejs20.x
       Architectures:
         - x86_64
+      Environment:
+        Variables:
+          bucket_name: ""
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /hello
-            Method: get
+            Path: /upload
+            Method: post
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
